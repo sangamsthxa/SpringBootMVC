@@ -7,5 +7,10 @@
 </head>
 <body>
 Welcome to Spring Boot Framework!
+<form action="add">
+    Enter 1st number: <input type="number" name="num1"> <br>
+    Enter 2nd number: <input type="number" name="num2"> <br>
+    <input type="submit">
+</form>
 </body>
 </html>
