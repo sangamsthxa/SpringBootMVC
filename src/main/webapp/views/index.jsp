@@ -7,9 +7,9 @@
 </head>
 <body>
 Welcome to Spring Boot Framework!
-<form action="add">
-    Enter 1st number: <input type="number" name="num1"> <br>
-    Enter 2nd number: <input type="number" name="num2"> <br>
+<form action="addAlien" method="POST">
+    Enter Alien Id: <input type="number" name="aid"> <br>
+    Enter Alien Name: <input type="text" name="aname"> <br>
     <input type="submit">
 </form>
 </body>
