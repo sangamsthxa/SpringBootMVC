@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.sangam.springbootmvc.model.Alien;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,8 @@ import java.util.List;
 @Controller
 public class HomeController
 {
+    @Autowired
+    private AlienRepo alienRepo;
     @ModelAttribute
     public void modelData(Model model){
         model.addAttribute("name", "Aliens");
@@ -35,14 +38,29 @@ public class HomeController
     }
 
     @PostMapping("addAlien")
-    public String Add(@ModelAttribute Alien alien){
+    public String AddAlien(@ModelAttribute Alien alien){
+        alienRepo.save(alien);
         return "result";
     }
 
     @GetMapping("getAliens")
     public String getAliens(Model model){
-        List<Alien> aliens = Arrays.asList(new Alien(101,"Charles"), new Alien(102,"David"));
+        List<Alien> aliens = alienRepo.findAll();
         model.addAttribute("result", aliens);
+        return "showAliens";
+    }
+
+    @GetMapping("getAlien")
+    public String getAlienById(@RequestParam int id,  Model model){
+        model.addAttribute("result",
+                alienRepo.getOne(id));
+        return "showAliens";
+    }
+
+    @GetMapping("getAlienByName")
+    public String getAlienByName(@RequestParam String name,  Model model){
+        model.addAttribute("result",
+                alienRepo.find(name));
         return "showAliens";
     }
 
