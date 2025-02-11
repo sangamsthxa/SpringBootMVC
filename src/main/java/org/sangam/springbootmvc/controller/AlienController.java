@@ -29,8 +29,8 @@ public class AlienController {
         return alien;
     }
 
-    @PostMapping("alien")
-    public Alien createAlien(Alien alien){
+    @PostMapping(path="alien", consumes = {"application/json"})
+    public Alien createAlien(@RequestBody Alien alien){
         alienRepo.save(alien);
         return alien;
     }
